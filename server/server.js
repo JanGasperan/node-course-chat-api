@@ -19,17 +19,16 @@ io.on('connection', (socket) => {
 
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user connected'));
 
-  socket.on('createMessage', (message) => {
-    console.log('create Message', message);
+  socket.on('createMessage', (m, callback) => {
+    console.log('create Message', m);
+    io.emit('newMessage', generateMessage(m.from, m.text));
+    callback('This is from the server');
     // emit evnet to every connection
     // io.emit('newMessage', {
     //   from: message.from,
     //   text: message.text,
     //   createdAt: new Date().getTime()
     // });
-
-    // send event to everybody but the sender
-    socket.broadcast.emit('newMessage', generateMessage(message.from, message.text));
   });
 
   socket.on('disconnect', () => {
