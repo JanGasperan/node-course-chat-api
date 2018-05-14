@@ -42,8 +42,6 @@ class Users {
 module.exports = {Users};
 
 
-
-
 // class Person {
 //   constructor (name, age) {
 //     this.name = name;
